@@ -1,25 +1,8 @@
 import React from 'react'
 import styles from './Table.module.css'
 
-const dummyData = [
-    {
-        date: '2025-1-1',
-        name: 'Taro',
-        task: 'Coding',
-        comment: '50%'
-    }, {
-        date: '2025-1-1',
-        name: 'Taro',
-        task: 'Coding',
-        comment: '70%'
-    }, {
-        date: '2025-1-1',
-        name: 'Taro',
-        task: 'Coding',
-        comment: '100%'
-    }
-]
-export default function Table() {
+
+export default function Table({ data }) {
   return (
     <table className={styles.table}>
         <thead className={styles.tableHead}>
@@ -31,8 +14,8 @@ export default function Table() {
             </tr>
         </thead>
         <tbody className={styles.tableBody}>
-            {dummyData.map(item => (
-            <tr>
+            {data.map(item => (
+            <tr key={item.id}>
                 <td>{item.date}</td>
                 <td>{item.name}</td>
                 <td>{item.task}</td>
