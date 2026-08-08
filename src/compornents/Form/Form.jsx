@@ -1,16 +1,27 @@
 import React, { useState } from 'react'
 import styles from './Form.module.css'
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '@/lib/firebaseConfig';
+
 
 export default function Form() {
     const [name, setName] = useState('');
     const [task, setTask] = useState('');
     const [comment, setComment] = useState('');
 
-    const submitReport = (e) => {
+    const submitReport = async (e) => {
         e.preventDefault();
-        console.log('Name', name);
-        console.log('Task', task);
-        console.log('Comment', comment);
+        try {
+        const docRef = await addDoc(collection(db, "reports"), {
+            date: new Date(),
+            name: name,
+            task: task,
+            comment: comment
+        });
+        console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+        console.error("Error adding document: ", e);
+        }
     }
 
   return (
